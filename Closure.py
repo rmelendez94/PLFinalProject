@@ -14,7 +14,7 @@ class student(object):
             'mt2'   : -1,
             '$mt2'  : lambda x : data.update({'mt2' : x}),
             'final' : -1,
-            '$final': lambda x : data.update({'final: x'})
+            '$final': lambda x : data.update({'final' : x})
         }
 
         def cf(self, d):
