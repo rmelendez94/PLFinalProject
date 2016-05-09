@@ -137,12 +137,8 @@ def p_exp_call(p):
     'exp : call'
     p[0] = p[1]
 
-def p_quoted_list(p):
-    'quoted_list : QUOTE list'
-    p[0] = p[2]
-
 def p_list(p):
-    'list : LPAREN items RPAREN'
+    'list : LBRACKET items RBRACKET'
     p[0] = p[2]
 
 def p_items(p):
@@ -217,7 +213,58 @@ def p_nil(p):
 
 #====================================================================
 #===============Our Code=============================================
+def p_code_block(p):
+    '''code-block : LCURLY statements RCURLY
+                  | LCURLY empty RCURLY'''
 
+def p_statement(p):
+    '''statement : expression
+                 | expression ";"
+                 | declaration
+                 | declaration ";"
+                 | if-statement
+                 | if-statement ";"
+                 | return-statement
+                 | return-statement ";"'''
+
+def p_if_statement(p):
+    '''if-statement : IF condition-clause code-block
+                    | IF condition-clause code-block else-clause'''
+    if evaluate_condition(p[2]):
+        p[0] = p[3]
+    else:
+        if len(p) == 5:
+            p[0] = p[4]
+
+def p_else_clause(p):
+    '''else-clause : ELSE code-block
+                   | ELSE if-statement'''
+
+def p_return_statement(p):
+    '''return-statement : RETURN
+                        | RETURN expression'''
+
+def p_constant_declaration(p):
+    '''constant-declaration : LET identifier COLON type EQUALS expression'''
+
+def p_variable_declaration(p):
+    '''variable-declaration : VAR identifier COLON type EQUALS expression'''
+
+def p_assignment_operator(p):
+    '''assignment-operation : identifier EQUALS value'''
+
+def p_ternary_conditional_operator(p):
+    '''ternary-conditional-operation : condition QMARK expression COLON expression'''
+    if evaluate_condition(p[1]):
+        p[0] = p[3]
+    else:
+        p[0] = p[5]
+
+
+def p_identifier(p):
+    '''identifier : IDENTIFIER'''
+    # add identifier to variable list
+    p[0] = p[1]
 
 def p_literal(p):
     '''literal : numeric-literal
@@ -239,7 +286,10 @@ def p_numeric_literal_integer(p):
 def p_string_literal(p):
     '''string-literal : QUOTE STRING QUOTE
                       | interpolated-string-literal'''
-    p[0] = p[1]
+    if len(p) == 4:
+        p[0] = p[2]
+    else:
+        p[0] = p[1]
 
 def p_interpolated_string_literal(p):
     '''interpolated-string-literal : QUOTE interpolated-text QUOTE

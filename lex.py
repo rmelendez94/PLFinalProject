@@ -20,7 +20,7 @@ reserved = {
 
 # List of token names.   
 tokens = ['IDENTIFIER', 'BINDIG', 'OCTDIG', 'HEXDIG', 'DECDIG','STRING', \
-          'QUOTE', 'LPAREN', 'RPAREN', 'LCURLY', 'RCURLY', 'QMARK', 'XMARK', \
+          'QUOTE', 'LPAREN', 'RPAREN', 'LCURLY', 'RCURLY', 'LBRACKET', 'RBRACKET', 'QMARK', 'XMARK', \
           'COLON', 'EQUALS', 'DPOINT', 'SLASH', 'COMMENT', 'ADD_OP', \
           'EQ_OP', 'NE_OP', 'LE_OP', 'GE_OP', 'LT_OP', 'GT_OP'] + list(reserved.keys())
 
@@ -35,6 +35,8 @@ t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_LCURLY = r'{'
 t_RCURLY = r'}'
+t_LBRACKET = r'\['
+t_RBRACKET = r']'
 t_QMARK = r'?'
 t_XMARK = r'!'
 t_COLON = r':'
