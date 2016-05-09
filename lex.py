@@ -19,8 +19,8 @@ reserved = {
 }
 
 # List of token names.   
-tokens = ['IDENTIFIER', 'BINDIG', 'OCTDIG', 'HEXDIG', 'DECDIG', \
-          'STRING', 'LPAREN', 'RPAREN', 'LCURLY', 'RCURLY', 'QMARK', 'XMARK', \
+tokens = ['IDENTIFIER', 'BINDIG', 'OCTDIG', 'HEXDIG', 'DECDIG','STRING', \
+          'QUOTE', 'LPAREN', 'RPAREN', 'LCURLY', 'RCURLY', 'QMARK', 'XMARK', \
           'COLON', 'EQUALS', 'DPOINT', 'SLASH', 'COMMENT', 'ADD_OP', \
           'EQ_OP', 'NE_OP', 'LE_OP', 'GE_OP', 'LT_OP', 'GT_OP'] + list(reserved.keys())
 
@@ -30,6 +30,7 @@ t_BINDIG = r'[01]'
 t_OCTDIG = r'[0-7]'
 t_HEXDIG = r'[0-9a-fA-F]'
 t_DECDIG = r'[0-9]'
+t_QUOTE = r'"'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_LCURLY = r'{'
@@ -60,6 +61,7 @@ def t_IDENTIFIER(t):
 
 def t_STRING(t):
     r'"[a-zA-Z0-9_+\*\- :,]*"'
+    t.value = t[1:-1]
     return t
 
 
