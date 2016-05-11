@@ -13,7 +13,6 @@ print ("Nope") //Print if they do not match, case 2 above
 
 var list1 = (exec 'from java.util import stream; List<String> myList = Arrays.asList("a1", "a2", "b1", "c2", "c1"); List<String> myNewList = myList.stream().filter(s -> s.startsWith("c")).map (String::toUpperCase).sorted().collect(Collectors.toList());; toReturn = myNewList }') //This will use java streams to get list [C1, C2]
 
-print (list1) //Print the streamed list, should output [C1, C2]
+print (list1) //Print the streamed list, should output [C1, C2] (possibly change to string)
 
-
-
+//We now need list comprehension incorporated, Use python in an exec?
