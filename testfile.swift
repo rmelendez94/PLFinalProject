@@ -5,11 +5,7 @@ let variable2 = 35
 var variable3 = (exec 'from java.lang import Math; toReturn = Math.max(23, 34)') //Here they dont
 var variable4 = 99
 
-if variable1 == variable2 { //Uses Variables 1-4 above
-print ("We have a match") //Print if the numbers match, case 1 above
-} else {
-print ("Nope") //Print if they do not match, case 2 above
-}
+if variable1 == variable2 { print("We have a match") } else { print("Nope") }
 
 var list1 = (exec 'import Stream; toReturn = Stream.stream1()') //This will use java streams to get list [C1, C2]
 

@@ -45,6 +45,7 @@ t_QUOTE = r'"'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_ADD_OP = r'\+'
+t_EQUALS = r'='
 t_EQ_OP  = r'=='
 t_NE_OP  = r'!='
 t_LE_OP  = r'<='
@@ -62,21 +63,17 @@ t_DPOINT = r'.'
 t_COMMENT = r'//'
 """
 
-def t_EQUALS(t):
-    r'='
-    return t
-
 def t_SLASH(t):
     r'\\'
     return t
 
 def t_BEGINSTRING(t):
-    r'\"[\w\s]+'
+    r'\"[\w\s\.]+'
     t.value = t.value[1:]
     return t
 
 def t_ENDSTRING(t):
-    r'[\w\s]+\"'
+    r'[\w\s\.]+\"'
     t.value = " " + t.value[:-1]
     return t
 
