@@ -113,16 +113,12 @@ operations = global_env.keys()
 toReturn = None
 
 def eval(x, env=global_env):
-    print("EVAL:"), x
     "Evaluate an expression in an environment."
     if isinstance(x, Symbol) and x in variables:      # variable reference
-        print "In Symbol and is variable:", x, env.find(x)[x]
         return env.find(x)[x]
     elif isinstance(x,Symbol) and x in operations:
-        print "In Symbol and is operation:", x, env.find(x)[x]
         return env.find(x)[x]
     elif not isinstance(x, List):  # constant literal
-        print "In IS_NOT_LIST:", x
         return x
     elif x[0] == 'quote':          # (quote exp)
         (_, exp) = x
@@ -135,7 +131,6 @@ def eval(x, env=global_env):
         (_, var, exp) = x
         env[var] = eval(exp, env)
         variables.append(var)
-        print "all variables:", variables
     elif x[0] == 'set!':           # (set! var exp)
         (_, var, exp) = x
         env.find(var)[var] = eval(exp, env)
@@ -151,13 +146,10 @@ def eval(x, env=global_env):
         (_, var, exp) = x
         env[var] = eval(exp, env)
     elif x[0] == 'return':
-        print "In RETURN:", x[1][0]
         return eval(x[1][0], env)
     elif x[0] == 'print':
-        print "In PRINT:", x[1]
         return eval(x[1],env)
     else:                          # (proc arg...)
-        print "In ELSE:", x
         if x[0] in operations:
             proc = eval(x[0], env)
             args = [eval(exp, env) for exp in x[1:]]

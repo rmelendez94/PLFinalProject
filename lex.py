@@ -73,22 +73,18 @@ def t_SLASH(t):
 def t_BEGINSTRING(t):
     r'\"[\w\s]+'
     t.value = t.value[1:]
-    print "Saw BEGINSTRING:", t.value
     return t
 
 def t_ENDSTRING(t):
     r'[\w\s]+\"'
     t.value = " " + t.value[:-1]
-    print "Saw ENDSTRING:", t.value
     return t
 
 def t_IDENTIFIER(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
     if t.value.upper() in reserved:
-        print "In t_IDENTIFIER, saw reserved:", t.value
+        # print "In t_IDENTIFIER, saw reserved:", t.value
         t.type = t.value.upper()
-    else:
-        print "In t_IDENTIFIER, saw id:", t.value
     return t
 
 def t_NUM(t):

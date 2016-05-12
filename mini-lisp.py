@@ -2,7 +2,7 @@
 from yacc import yacc
 import cmd
 
-class MiniLisp(cmd.Cmd):     # See https://docs.python.org/2/library/cmd.html
+class MiniSwift(cmd.Cmd):     # See https://docs.python.org/2/library/cmd.html
     """
     MiniLisp evalúa expresiones sencillas con sabor a lisp, 
     más información en http://www.juanjoconti.com.ar
@@ -10,8 +10,8 @@ class MiniLisp(cmd.Cmd):     # See https://docs.python.org/2/library/cmd.html
 
     def __init__(self):
         cmd.Cmd.__init__(self)
-        self.prompt = "ml> "
-        self.intro  = "Bienvenido a MiniLisp"
+        self.prompt = "ms> "
+        self.intro  = "bienvenue à MiniSwift"
 
     def do_exit(self, args):
         """Exits from the console"""
@@ -45,5 +45,5 @@ class MiniLisp(cmd.Cmd):     # See https://docs.python.org/2/library/cmd.html
         """
 
 if __name__ == '__main__':
-        ml = MiniLisp()
+        ml = MiniSwift()
         ml.cmdloop()     # See https://docs.python.org/2/library/cmd.html
