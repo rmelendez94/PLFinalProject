@@ -22,3 +22,8 @@ print (list3)
 if list2 == list3 { print("The output of the java stream and the output of the python list comprehension are the same.") } else { print("The outputs are different.")}
 print ("The output from the java stream: \(list2)")
 print ("The output form the python list comprehension: \(list3)")
+
+var list4 = (exec 'import Closure; Closure.createStudentsList(); toReturn = Closure.returnAllStudents()')
+print(list4)
+list4 = (exec 'import Closure; Closure.createStudentsList(); toReturn = Closure.returnAllBusinessStudents()')
+print(list4)

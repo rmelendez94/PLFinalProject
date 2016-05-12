@@ -1,3 +1,12 @@
+import csv
+
+def createStudentsList():
+    with open('Students.csv', 'rb') as csvfile:
+        studentreader = csv.reader(csvfile, delimiter=',')
+        for row in studentreader:
+            addStudent(row)
+    csvfile.close()
+
 class student(object):
     def f(self):
         data = {
@@ -17,9 +26,14 @@ class student(object):
             '$final': lambda x : data.update({'final' : x})
         }
 
+        def returnListFormat(self):
+            return [self.run('major'),self.run('fname'), self.run('lname'),self.run('age'),self.run('mt1'),self.run('mt2'), self.run('final')]
+
         def cf(self, d):
             if d in data:
                 return data[d]
+            elif d == 'returnListFormat':
+                return returnListFormat(self)
             else:
                 return None
         return cf
@@ -54,107 +68,32 @@ class business_student(student):            # showcases polymorphism
     run = f(1)
 
 students = []
-s1 = student()
-e1 = econ_student()
-b1 = business_student()
+s1 = student
+e1 = econ_student
+b1 = business_student
 
-def addStudent(major, fname, lname, age, mt1, mt2, final):
-    new_student = []
+def addStudent(rowdata):
+    (major, fname, lname, age, mt1, mt2, final) = rowdata
     if major == "Undeclared":
-        new_student.append(s1.run('major'))
-        s1.run('$fname')(fname)
-        new_student.append(s1.run('fname'))
-        s1.run('$lname')(lname)
-        new_student.append(s1.run('lname'))
-        s1.run('$age')(age)
-        new_student.append(s1.run('age'))
-        s1.run('$mt1')(mt1)
-        new_student.append(s1.run('mt1'))
-        s1.run('$mt2')(mt2)
-        new_student.append(s1.run('mt2'))
-        s1.run('$final')(final)
-        new_student.append(s1.run('final'))
+        new_student = s1()
     elif major == "Economics":
-        new_student.append(e1.run('major'))
-        e1.run('$fname')(fname)
-        new_student.append(e1.run('fname'))
-        e1.run('$lname')(lname)
-        new_student.append(e1.run('lname'))
-        e1.run('$age')(age)
-        new_student.append(e1.run('age'))
-        e1.run('$mt1')(mt1)
-        new_student.append(e1.run('mt1'))
-        e1.run('$mt2')(mt2)
-        new_student.append(e1.run('mt2'))
-        e1.run('$final')(final)
-        new_student.append(e1.run('final'))
+        new_student = e1()
     elif major == "Business":
-        new_student.append(b1.run('major'))
-        b1.run('$fname')(fname)
-        new_student.append(b1.run('fname'))
-        b1.run('$lname')(lname)
-        new_student.append(b1.run('lname'))
-        b1.run('$age')(age)
-        new_student.append(b1.run('age'))
-        b1.run('$mt1')(mt1)
-        new_student.append(b1.run('mt1'))
-        b1.run('$mt2')(mt2)
-        new_student.append(b1.run('mt2'))
-        b1.run('$final')(final)
-        new_student.append(b1.run('final'))
-    students.append(new_student)
+        new_student = b1()
+    else:
+        # row has error in data
+        return
+    new_student.run('$fname')(fname)
+    new_student.run('$lname')(lname)
+    new_student.run('$age')(age)
+    new_student.run('$mt1')(mt1)
+    new_student.run('$mt2')(mt2)
+    new_student.run('$final')(final)
+    students.append(new_student.run('returnListFormat'))
+    return
 
 def returnAllStudents():
     return students
 
-
-'''
-class substance(object):
-    def f(self):
-        data = {
-            'name': 'Rita',
-            '$name': lambda x: data.update({'name': x}),
-            'age': 67,
-            '$age': lambda x: data.update({'age': x})
-        }
-        def cf(self, d):
-            if d in data:
-                return data[d]
-            else:
-                return None
-        return cf
-    run = f(1)
-
-s1 = substance()
-print
-print s1.run('name')
-s1.run('$name')('Phil')
-print s1.run('name')
-print s1.run('age')
-s1.run('$age')('66')
-print s1.run('age')
-print s1.run('dob')
-# print s1.data
-
-class animal(substance):
-    #def run(self, a): return super(animal, self).run(a)
-    def f(self):
-        data = {
-            'name': 'Animal',
-            '$name': lambda x: data.update({'name': x})
-        }
-        def cf(self, d):
-            if d in data:
-                return data[d]
-            else:
-                return super(animal, self).run(d)
-        return cf
-    run = f(1)
-
-a1 = animal()
-print
-print "Now printing for a1"
-print a1.run('name')
-print a1.run('age')
-print a1.run('dob')
-'''
+def returnAllBusinessStudents():
+    return [i for i in students if i[0] == 'Business']
