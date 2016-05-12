@@ -36,94 +36,23 @@ public class Stream {
         return emp;
     }
 
-    public static ArrayList<List<Object>> createDeptList() {
-
-        ArrayList<List<Object>> dept = new ArrayList<List<Object>>();
-        // ("ID", "NAME", "REGION_ID")
-        List<Object> d1 = Arrays.asList(10, "Finance", 1);
-        List<Object> d2 = Arrays.asList(31, "Sales", 1);
-        List<Object> d3 = Arrays.asList(32, "Sales", 2);
-        List<Object> d4 = Arrays.asList(33, "Sales", 3);
-        List<Object> d5 = Arrays.asList(34, "Sales", 4);
-        List<Object> d6 = Arrays.asList(35, "Sales", 5);
-        List<Object> d7 = Arrays.asList(41, "Operations", 1);
-        List<Object> d8 = Arrays.asList(42, "Operations", 2);
-        List<Object> d9 = Arrays.asList(43, "Operations", 3);
-        List<Object> d10 = Arrays.asList(44, "Operations", 4);
-        List<Object> d11 = Arrays.asList(45, "Operations", 5);
-        List<Object> d12 = Arrays.asList(50, "Administration", 1);
-        dept.add(d1); dept.add(d2); dept.add(d3); dept.add(d4); dept.add(d5); dept.add(d6); dept.add(d7); dept.add(d8); dept.add(d9); dept.add(d10); dept.add(d11); dept.add(d12);
-
-        return dept;
-    }
-
-    public static List<Object> stream1(ArrayList<List<Object>> emp) { //Adds full List
+    public static List<Object> stream1(ArrayList<List<Object>> emp) {
         List<Object> list1 = emp.stream().collect(Collectors.toList());
         return list1;
     }
 
-    /*public void stream2() {
-        System.out.println("\nselect last_name, first_name, title, salary from emp: ");
-        emp.stream()
-                .forEach(e -> {
-                    List<Object> eArray = Arrays.asList(e.get(1), e.get(2), e.get(6), e.get(7));
-                    System.out.println(eArray);
-                });
-    }
+    public static ArrayList<List<Object>> stream2(ArrayList<List<Object>> emp) {
 
-    public void stream3() {
-        System.out.println("\nselect last_name, first_name, title, salary from s_emp where salary > 1500 and dept_id > 40: ");
-        emp.stream()
-                .filter(e -> (Integer) e.get(7) > 1500 && (Integer) e.get(9) > 40)
-                .forEach(e -> {
-                    List<Object> eArray = Arrays.asList(e.get(1), e.get(2), e.get(6), e.get(7));
-                    System.out.println(eArray);
-                });
-    }
-
-    public void stream4() {
         System.out.println("\nselect last_name, first_name, title, salary from s_emp where salary > 1500 and dept_id > 40 order by last_name: ");
+        ArrayList<List<Object>> list2 = new ArrayList<List<Object>>();
         emp.stream()
                 .filter(e -> (Integer) e.get(7) > 1500 && (Integer) e.get(9) > 40)
                 .sorted((em1, em2) -> em1.get(1).toString().compareTo(em2.get(1).toString()))
                 .forEach(e -> {
                     List<Object> eArray = Arrays.asList(e.get(1), e.get(2), e.get(6), e.get(7));
-                    System.out.println(eArray);
+                    list2.add(eArray);
                 });
+        return list2;
     }
-
-    public void stream5() {
-        System.out.println("\nselect last_name, first_name, title, salary from s_emp where salary > (avg(salary) from s_emp) order by last_name: ");
-        double avgSalary = emp.stream()
-                .mapToInt(e -> (Integer) e.get(7))
-                .average()
-                .getAsDouble();
-
-        emp.stream()
-                .filter(e -> (Integer) e.get(7) > avgSalary)
-                .sorted((em1, em2) -> em1.get(1).toString().compareTo(em2.get(1).toString()))
-                .distinct()
-                .forEach(e -> {
-                    List<Object> eArray = Arrays.asList(e.get(1), e.get(2), e.get(6), e.get(7));
-                    System.out.println(eArray);
-                });
-    }
-
-    public void stream6() {
-        System.out.println("\nselect dept_id, count(*) from s_emp group by dept_id order by dept_id: ");
-        emp.stream()
-                .map(e -> (Integer) e.get(9))
-                .distinct()
-                .sorted((dp1, dp2) -> Integer.compare(dp1, dp2))
-                .forEach(dp -> {
-                    Long count = emp.stream()
-                            .filter(e -> (Integer) e.get(9) == dp)
-                            .count();
-
-                    List<Object> dArray = Arrays.asList(dp, count);
-                    System.out.println(dArray);
-                });
-    }*/
-
 }
 
