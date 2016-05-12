@@ -145,14 +145,8 @@ def eval(x, env=global_env):
         if x[0] in operations:
             proc = eval(x[0], env)
             args = [eval(exp, env) for exp in x[1:]]
-            print "ARGS:", args
             return proc(*args)
-        #elif isinstance(x, List) and len(x) == 1 and isinstance(x[0], Symbol):
-        #    return eval(x[0], env)
-        #elif isinstance(x, List) and len(x) == 1 and isinstance(x[0], Number):
-        #    return eval(x[0], env)
         else:
-            print "I got to toReturn:", x
             toReturn = ""
             for i in x:
                 toReturn += str(eval(i,env))

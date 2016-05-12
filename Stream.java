@@ -42,8 +42,6 @@ public class Stream {
     }
 
     public static ArrayList<List<Object>> stream2(ArrayList<List<Object>> emp) {
-
-        System.out.println("\nselect last_name, first_name, title, salary from s_emp where salary > 1500 and dept_id > 40 order by last_name: ");
         ArrayList<List<Object>> list2 = new ArrayList<List<Object>>();
         emp.stream()
                 .filter(e -> (Integer) e.get(7) > 1500 && (Integer) e.get(9) > 40)
