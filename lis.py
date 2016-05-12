@@ -52,21 +52,13 @@ def standard_env():
     env = Env()
     env.update(vars(math)) # sin, cos, sqrt, pi, ...
     env.update({
-        '+':op.add, '-':op.sub, '*':op.mul, '/':op.div, 
+        '+':op.add,
         '>':op.gt, '<':op.lt, '>=':op.ge, '<=':op.le, '==':op.eq,
-        'length':  len,
-        'list':    lambda *x: list(x), 
-        'list?':   lambda x: isinstance(x,list),
+
         'exec':    lambda x: eval(compile(x,'None','single')),
-        'map':     map,
-        'max':     max,
-        'min':     min,
-        'not':     op.not_,
-        'null?':   lambda x: x == [], 
-        'number?': lambda x: isinstance(x, Number),
-        'procedure?': callable,
-        'round':   round,
-        'symbol?': lambda x: isinstance(x, Symbol),
+
+        #select last_name, first_name, title, salary from s_emp where salary > 1500 and dept_id > 40 order by last_name;
+        'listcomp': lambda x: sorted([[i[1], i[2], i[6], i[7]] for i in eval(x) if i[7] > 1500 and int(i[9]) > 40], key = lambda y: y[0]),
     })
     return env
 
@@ -153,6 +145,7 @@ def eval(x, env=global_env):
         if x[0] in operations:
             proc = eval(x[0], env)
             args = [eval(exp, env) for exp in x[1:]]
+            print "ARGS:", args
             return proc(*args)
         #elif isinstance(x, List) and len(x) == 1 and isinstance(x[0], Symbol):
         #    return eval(x[0], env)

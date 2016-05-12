@@ -26,6 +26,10 @@ def p_exp_exec(p):
     'exp : LPAREN EXEC LISP_EXEC RPAREN'
     p[0] = [p[2]] + [str(p[3])]
 
+def p_exp_list_comp(p):
+    'exp : LISTCOMP LPAREN IDENTIFIER RPAREN'
+    p[0] = [p[1]] + [p[3]]
+
 def p_exp_identifier(p):
     'exp : IDENTIFIER'
     p[0] = ['return'] + [[p[1]]]

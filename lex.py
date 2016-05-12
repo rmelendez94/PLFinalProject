@@ -15,30 +15,15 @@ reserved = {
     'TRUE'  : 'true',
     'FALSE' : 'false',
     'PRINT' : 'print',
-    'EXEC'  : 'exec'
+    'EXEC'  : 'exec',
+    'LISTCOMP': 'listcomp'
 }
 
 # List of token names.   
 tokens = ['LISP_EXEC', 'IDENTIFIER', 'EQUALS', 'NUM', 'LPAREN', 'RPAREN', 'QUOTE', 'SLASH', 'BEGINSTRING', 'ENDSTRING', \
           'ADD_OP', 'EQ_OP', 'NE_OP', 'LE_OP', 'GE_OP', 'LT_OP', 'GT_OP', 'LCURLY', 'RCURLY'] + list(reserved.keys())
 
-"""'BINDIG', 'OCTDIG', 'HEXDIG', 'DECDIG','STRING', \
-          'LBRACKET', 'RBRACKET', 'QMARK', 'XMARK', \
-          'COLON', 'EQUALS', 'DPOINT', 'COMMENT'] + list(reserved.keys())
-"""
 # Regular expression rules for simple tokens
-"""
-t_BINDIG = r'[01]'
-t_OCTDIG = r'[0-7]'
-t_HEXDIG = r'[0-9a-fA-F]'
-t_DECDIG = r'[0-9]'
-
-t_LBRACKET = r'\['
-t_RBRACKET = r']'
-t_QMARK = r'?'
-t_XMARK = r'!'
-t_COLON = r':'
-"""
 t_LCURLY = r'{'
 t_RCURLY = r'}'
 t_QUOTE = r'"'
@@ -55,13 +40,7 @@ t_GT_OP  = r'>'
 
 def t_LISP_EXEC(t):
     r"'.*'"
-    print "Saw LISP_EXEC:", t.value
     return t
-
-"""
-t_DPOINT = r'.'
-t_COMMENT = r'//'
-"""
 
 def t_SLASH(t):
     r'\\'
