@@ -3,10 +3,7 @@ import java.util.stream.Collectors;
 
 public class Stream {
 
-    public ArrayList<List<Object>> emp = createEmpList();
-    public ArrayList<List<Object>> dept = createDeptList();
-
-    public ArrayList<List<Object>> createEmpList() {
+    public static ArrayList<List<Object>> createEmpList() {
         ArrayList<List<Object>> emp = new ArrayList<List<Object>>();
         // ("ID", "LAST_NAME", "FIRST_NAME", "USERID", "START_DATE", "COMMENTS", "TITLE", "SALARY", "COMMISSION", "DEPT_ID", "MANAGER_ID")
         List<Object> e1 = Arrays.asList(1, "MARTIN", "CARMEN", "MARTINCU", "3-MAR-90", "", "PRESIDENT", 4500, 0, 50, 0);
@@ -39,7 +36,7 @@ public class Stream {
         return emp;
     }
 
-    public ArrayList<List<Object>> createDeptList() {
+    public static ArrayList<List<Object>> createDeptList() {
 
         ArrayList<List<Object>> dept = new ArrayList<List<Object>>();
         // ("ID", "NAME", "REGION_ID")
@@ -60,10 +57,8 @@ public class Stream {
         return dept;
     }
 
-    public List<Object> stream1() { //Adds full List
-        List<Object> list1 = new ArrayList();
-        emp.stream()
-                .forEach(e -> { list1.add(e); });
+    public static List<Object> stream1(ArrayList<List<Object>> emp) { //Adds full List
+        List<Object> list1 = emp.stream().collect(Collectors.toList());
         return list1;
     }
 
